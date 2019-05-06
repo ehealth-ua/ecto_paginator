@@ -69,7 +69,6 @@ defmodule EctoPaginator do
       query
       |> exclude(:preload)
       |> exclude(:order_by)
-      |> exclude(:join)
       |> aggregate()
       |> repo.one(caller: caller)
 
