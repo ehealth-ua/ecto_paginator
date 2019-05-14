@@ -57,11 +57,16 @@ defmodule EctoPaginator do
 
   defp get_entries(query, repo, page_number, _, page_size, caller, options) do
     offset = Keyword.get_lazy(options, :offset, fn -> page_size * (page_number - 1) end)
+    paginate_entries = Keyword.get(options, :paginate_entries, true)
 
-    query
-    |> offset(^offset)
-    |> limit(^page_size)
-    |> repo.all(caller: caller)
+    if paginate_entries do
+      query
+      |> offset(^offset)
+      |> limit(^page_size)
+      |> repo.all(caller: caller)
+    else
+      repo.all(query, caller: caller)
+    end
   end
 
   defp total_entries(query, repo, caller) do
