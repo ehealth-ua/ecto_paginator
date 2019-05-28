@@ -33,6 +33,22 @@ defmodule EctoPaginator do
     }
   end
 
+  def paginate(entries, total_entries, %Config{
+        page_size: page_size,
+        page_number: page_number
+      })
+      when is_list(entries) and is_integer(total_entries) do
+    total_pages = total_pages(total_entries, page_size)
+
+    %Page{
+      page_size: page_size,
+      page_number: page_number,
+      entries: entries,
+      total_entries: total_entries,
+      total_pages: total_pages
+    }
+  end
+
   def paginate(entries_query, count_query, %Config{
         page_size: page_size,
         page_number: page_number,
