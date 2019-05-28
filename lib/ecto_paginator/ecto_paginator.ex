@@ -19,10 +19,15 @@ defmodule EctoPaginator do
 
     total_pages = total_pages(total_entries, page_size)
 
+    entries =
+      Keyword.get_lazy(options, :entries, fn ->
+        get_entries(query, repo, page_number, total_pages, page_size, caller, options)
+      end)
+
     %Page{
       page_size: page_size,
       page_number: page_number,
-      entries: get_entries(query, repo, page_number, total_pages, page_size, caller, options),
+      entries: entries,
       total_entries: total_entries,
       total_pages: total_pages
     }
@@ -43,11 +48,15 @@ defmodule EctoPaginator do
 
     total_pages = total_pages(total_entries, page_size)
 
+    entries =
+      Keyword.get_lazy(options, :entries, fn ->
+        get_entries(entries_query, repo, page_number, total_pages, page_size, caller, options)
+      end)
+
     %Page{
       page_size: page_size,
       page_number: page_number,
-      entries:
-        get_entries(entries_query, repo, page_number, total_pages, page_size, caller, options),
+      entries: entries,
       total_entries: total_entries,
       total_pages: total_pages
     }
