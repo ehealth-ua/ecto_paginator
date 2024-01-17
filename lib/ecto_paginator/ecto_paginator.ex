@@ -111,6 +111,12 @@ defmodule EctoPaginator do
     |> count()
   end
 
+  defp aggregate(%{distinct: %{expr: true}} = query) do
+    query
+    |> exclude(:select)
+    |> count()
+  end
+
   defp aggregate(
          %{
            group_bys: [
