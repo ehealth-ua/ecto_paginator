@@ -12,7 +12,7 @@ defmodule EctoPaginator.Mixfile do
     ]
   end
 
-  defp aliases do
+  def aliases do
     [
       "db.reset": [
         "ecto.drop",
@@ -22,16 +22,9 @@ defmodule EctoPaginator.Mixfile do
     ]
   end
 
-  def application do
-    [
-      applications: applications(Mix.env())
-    ]
-  end
+  def applications(_) do [:scrivener, :logger] end
 
-  defp applications(:test), do: [:scrivener, :postgrex, :ecto, :logger, :telemetry]
-  defp applications(_), do: [:scrivener, :logger]
-
-  defp deps do
+  def deps do
     [
       {:scrivener, "~> 2.4"},
       {:ecto, "~> 3.11.0"},
@@ -40,7 +33,4 @@ defmodule EctoPaginator.Mixfile do
       {:ex_machina, "~> 2.3", only: [:dev, :test]}
     ]
   end
-
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_), do: ["lib"]
 end
