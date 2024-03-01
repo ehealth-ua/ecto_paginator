@@ -35,8 +35,8 @@ defmodule EctoPaginator.Mixfile do
   defp deps do
     [
       {:scrivener, "~> 2.4"},
-      {:ecto, "~> 3.0"},
-      {:ecto_sql, "~> 3.0", only: :test},
+      {:ecto, "~> 3.11.0"},
+      {:ecto_sql, "~> 3.11.0", only: :test},
       {:postgrex, ">= 0.0.0", only: :test},
       {:ex_machina, "~> 2.3", only: [:dev, :test]}
     ]
