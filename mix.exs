@@ -6,7 +6,6 @@ defmodule EctoPaginator.Mixfile do
       app: :ecto_paginator,
       version: "0.2.0",
       elixir: "~> 1.8",
-      elixirc_paths: elixirc_paths(Mix.env()),
       description: "Paginate your Ecto queries with Scrivener",
       deps: deps(),
       aliases: aliases()
